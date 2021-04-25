@@ -5,8 +5,18 @@ USE employees;
 
 CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT,
-    department_name VARCHAR(30),
-    PRIMARY KEY (department_id)
+    name VARCHAR(30) UNIQUE NOT NULL,
+    PRIMARY KEY (id)
+);
+DROP DATABASE IF EXISTS employees;
+CREATE DATABASE employees;
+
+USE employees;
+
+CREATE TABLE department (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(30) UNIQUE NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE role (
@@ -16,6 +26,7 @@ CREATE TABLE role (
    department_id INT NULL,
    FOREIGN KEY (department_id) REFERENCES department(id)
 );
+
 
 CREATE TABLE employee (
    id INT NOT NULL AUTO_INCREMENT,
@@ -28,8 +39,3 @@ CREATE TABLE employee (
    FOREIGN KEY (manager_id) REFERENCES employee(id)
 
 );
-
-SELECT * FROM employees;
-SELECT * FROM roles;
-SELECT * FROM departments;
-© 2021 GitHub, Inc.
