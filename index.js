@@ -1,9 +1,12 @@
-const inquirer = require('inquirer')
-const cTable = require('console.table');
-const DB = require('./db/database');
-// allows you to use Async await // 
+// const inquirer = require('inquirer')
+// require('console.table');
+// const DB = require('./db/database');
+// // allows you to use Async await // 
+// const mysql = require('mysql2');
+// const { response } = require('express');
+  
 const mysql = require('mysql2');
-const { response } = require('express');
+const inquirer = require('inquirer');
 
 //CREATE CONNECTION
 const connection = mysql.createConnection({
