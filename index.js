@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
     //user name and password //
     user: 'root',
     password: 'root',
-    database: 'employee-tracker'
+    database: 'employees'
 })
 
 function mainMenu() {
