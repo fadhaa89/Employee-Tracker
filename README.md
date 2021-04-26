@@ -14,6 +14,7 @@ Github page: Fadhaa89
 
 ## My Links :
 ## Repo Link :
+https://github.com/fadhaa89/Employee-Tracker
 
 
 ## Visuals :
