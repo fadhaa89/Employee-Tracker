@@ -16,7 +16,8 @@ const connection = mysql.createConnection({
     password: 'root',
     database: 'employees'
 })
-
+// main menu function -prompt //
+//ARRAY OF QUESTIONS TO ASK ABOUT EACH ROLE//
 function mainMenu() {
     inquirer.prompt([{
             name: 'mainMenu',
@@ -58,7 +59,7 @@ function mainMenu() {
         })
 
 }
-
+//function to view the departments //
 function viewDepartments() {
     connection.query('SELECT * FROM department', (error, result) => {
         if (error) throw error;
@@ -69,7 +70,7 @@ function viewDepartments() {
         mainMenu();
     })
 }
-
+//function to view the rols //
 function viewRoles() {
     connection.query('SELECT * FROM role', (error, result) => {
         if (error) throw error;
@@ -80,7 +81,7 @@ function viewRoles() {
         mainMenu();
     })
 }
-
+//function to view employees//
 function viewEmployees() {
     connection.query('SELECT * FROM employee', (error, result) => {
         if (error) throw error;
@@ -91,7 +92,7 @@ function viewEmployees() {
         mainMenu();
     })
 }
-
+//function to add a department //
 function addDepartment() {
     inquirer.prompt([{
             name: 'name',
@@ -106,7 +107,7 @@ function addDepartment() {
             viewDepartments();
         })
 }
-
+// role to be added as a function //
 function addRole() {
     inquirer.prompt([{
                 name: 'name',
@@ -155,7 +156,7 @@ function addRole() {
             })
         })
 }
-
+//Employee add //
 function addEmployee() {
     inquirer.prompt([{
                 name: 'firstName',
@@ -269,7 +270,7 @@ function getRoles() {
 
     return roles;
 }
-
+// getting the Employee by :First names and last names //
 function getEmployees() {
     let firstNames = [];
     let lastNames = [];
@@ -298,7 +299,7 @@ function getEmployees() {
     return employees;
 }
 
-
+/////----------------------connection-----------------///////
 connection.connect(err => {
     if (err) throw err;
 
