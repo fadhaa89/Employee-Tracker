@@ -12,15 +12,15 @@ VALUES
 INSERT INTO role (title, salary, department_id)
 VALUES
  ('Sales Manager', 50000, 1), -- 1
- ('Sales Rep', 40000, 1), -- 2
- ('HR Manager', 85000, 2), -- 3
+ ('Sales Rep', 30000, 1), -- 2
+ ('Developer Manager', 15000, 2), -- 3
  ('HR Admin', 50000, 2), -- 4
  ('Marketing Director', 140000, 3), -- 5
  ('Marketing Admin', 65000, 3), -- 6
- ('IT Director', 195000, 4), -- 7
- ('Desktop Support', 100000, 4), -- 8
+ ('HR Director', 195000, 4), -- 7
+ ('Costomer Center Support', 60000, 4), -- 8
  ('Accounting Manager', 110000, 5), -- 9
- ('Accountant', 90000, 5) -- 10
+ ('Accountant', 80000, 5) -- 10
  ;
 
 

@@ -22,26 +22,26 @@ function mainMenu() {
             name: 'mainMenu',
             type: 'list',
             message: "Please select an option: ",
-            choices: ['View  departments', 'View roles', 'View employees', 'Add  department', 'Add  role', 'Add  employee', 'Update the employee role', 'Quit']
+            choices: ['View  departments', 'View roles', 'View employees', 'Add department', 'Add role', 'Add employee', 'Update the employee role', 'Quit']
         }])
         .then(response => {
             switch (response.mainMenu) {
-                case 'View  departments':
+                case 'View departments':
                     viewDepartments();
                     break;
-                case 'View  roles':
+                case 'View roles':
                     viewRoles();
                     break;
-                case 'View  employees':
+                case 'View employees':
                     viewEmployees();
                     break;
-                case 'Add  department':
+                case 'Add department':
                     addDepartment();
                     break;
-                case 'Add  role':
+                case 'Add role':
                     addRole();
                     break;
-                case 'Add  employee':
+                case 'Add employee':
                     addEmployee();
                     break;
                 case 'Update the employee role':
@@ -50,6 +50,10 @@ function mainMenu() {
                 case 'Quit':
                     connection.end();
                     break;
+                    default:
+                        console.log("Error");
+                    break;
+                    
             }
         })
 
