@@ -4,7 +4,7 @@ const DB = require('./db/database');
 // allows you to use Async await // 
 const mysql = require('mysql2');
 const { response } = require('express');
-  
+
 
 
 //CREATE CONNECTION
@@ -20,12 +20,13 @@ const connection = mysql.createConnection({
 //ARRAY OF QUESTIONS TO ASK ABOUT EACH ROLE//
 function mainMenu() {
     inquirer.prompt([{
-            name: 'mainMenu',
-            type: 'list',
-            message: "Please select an option: ",
-            choices: ['View  departments', 'View roles', 'View employees', 'Add department', 'Add role', 'Add employee', 'Update the employee role', 'Quit']
-        }])
+        name: 'mainMenu',
+        type: 'list',
+        message: "Please select an option: ",
+        choices: ['View departments', 'View roles', 'View employees', 'Add department', 'Add role', 'Add employee', 'Update the employee role', 'Quit']
+    }])
         .then(response => {
+        
             switch (response.mainMenu) {
                 case 'View departments':
                     viewDepartments();
@@ -51,16 +52,17 @@ function mainMenu() {
                 case 'Quit':
                     connection.end();
                     break;
-                    default:
-                        console.log("Error");
+                default:
+                    console.log("Error");
                     break;
-                    
+
             }
         })
 
 }
 //function to view the departments //
 function viewDepartments() {
+    console.log("hello");
     connection.query('SELECT * FROM department', (error, result) => {
         if (error) throw error;
 
@@ -95,10 +97,10 @@ function viewEmployees() {
 //function to add a department //
 function addDepartment() {
     inquirer.prompt([{
-            name: 'name',
-            type: 'input',
-            message: 'Enter the department name: '
-        }])
+        name: 'name',
+        type: 'input',
+        message: 'Enter the department name: '
+    }])
         .then(response => {
             connection.query('INSERT INTO department(name) VALUES (?)', [response.name], (error, result) => {
                 if (error) throw error;
@@ -108,32 +110,33 @@ function addDepartment() {
         })
 }
 // role to be added as a function //
-function addRole() {
+ async function addRole() {
+     try {
     inquirer.prompt([{
-                name: 'name',
-                type: 'input',
-                message: 'Enter the role name: '
-            },
-            {
-                name: 'salary',
-                type: 'number',
-                message: 'Enter the salary: ',
-                validate: salary => {
-                    if (salary) {
-                        return true;
-                    } else {
-                        console.log('Please enter a number!');
-                        return false;
-                    }
-                }
-            },
-            {
-                name: 'department',
-                type: 'list',
-                message: 'Select the department:',
-                choices: getDepartments()
+        name: 'name',
+        type: 'input',
+        message: 'Enter the role name: '
+    },
+    {
+        name: 'salary',
+        type: 'number',
+        message: 'Enter the salary: ',
+        validate: salary => {
+            if (salary) {
+                return true;
+            } else {
+                console.log('Please enter a number!');
+                return false;
             }
-        ])
+        }
+    },
+    {
+        name: 'department',
+        type: 'list',
+        message: 'Select the department:',
+        choices: getDepartments()
+    }
+    ])
         .then(response => {
             var responseID = 0;
 
@@ -155,32 +158,35 @@ function addRole() {
                 viewRoles();
             })
         })
+    } catch (err){
+        console.log(err);
+    }
 }
 //Employee add //
 function addEmployee() {
     inquirer.prompt([{
-                name: 'firstName',
-                type: 'input',
-                message: 'Enter the employee first name: '
-            },
-            {
-                name: 'lastName',
-                type: 'input',
-                message: 'Enter the employee last name: '
-            },
-            {
-                name: 'role',
-                type: 'list',
-                message: 'Select the role:',
-                choices: getRoles()
-            },
-            {
-                name: 'manager',
-                type: 'list',
-                message: 'Select the manager:',
-                choices: getEmployees()
-            }
-        ])
+        name: 'firstName',
+        type: 'input',
+        message: 'Enter the employee first name: '
+    },
+    {
+        name: 'lastName',
+        type: 'input',
+        message: 'Enter the employee last name: '
+    },
+    {
+        name: 'role',
+        type: 'list',
+        message: 'Select the role:',
+        choices: getRoles()
+    },
+    {
+        name: 'manager',
+        type: 'list',
+        message: 'Select the manager:',
+        choices: getEmployees()
+    }
+    ])
         .then(response => {
             var roleID = 0;
             var managerID = 0;
@@ -226,16 +232,16 @@ function addEmployee() {
 
 function updateEmployee() {
     inquirer.prompt([{
-                name: 'employee',
-                type: 'number',
-                message: 'Enter the employee ID of the employee you wish to update:'
-            },
-            {
-                name: 'role',
-                type: 'number',
-                message: 'Enter the role ID you wish to update the employee to:'
-            }
-        ])
+        name: 'employee',
+        type: 'number',
+        message: 'Enter the employee ID of the employee you wish to update:'
+    },
+    {
+        name: 'role',
+        type: 'number',
+        message: 'Enter the role ID you wish to update the employee to:'
+    }
+    ])
         .then(response => {
             connection.query('UPDATE employee SET role_id = ? WHERE id = ? ', [response.role, response.employee], (error, result) => {
                 if (error) throw error;
@@ -246,6 +252,7 @@ function updateEmployee() {
 }
 
 function getDepartments() {
+    console.log("hello");
     let departments = [];
     connection.query('SELECT name FROM department', (error, response) => {
         if (error) throw error;
@@ -253,9 +260,11 @@ function getDepartments() {
         response.forEach(department => {
             departments.push(department.name);
         })
+        console.log(departments);
+
+        return departments;
     })
 
-    return departments;
 }
 
 function getRoles() {
