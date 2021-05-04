@@ -19,5 +19,6 @@ https://github.com/fadhaa89/Employee-Tracker
 
 ## Visuals :
 first Video :
+![Example Gif](./assets/example.gif)
 
 C:\Users\fadha\Desktop\homework\Employee-Tracker\assets\example.gif
